@@ -4,24 +4,20 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
 trigger:
-  - main
+- master
 
 pool:
   name: Default
 
 steps:
-  - script: |
-      sudo apt-get update
-      sudo apt-get install -y openjdk-17-jdk
-      echo "##vso[task.setvariable variable=JAVA_HOME_17_X64]/usr/lib/jvm/java-17-openjdk-amd64"
-    displayName: 'Install JDK 17'
+- script: echo My first Azure Pipeline for Gradle project
+  displayName: 'Run a one-line script'
 
-  - task: Gradle@3
-    displayName: 'Build with Gradle Wrapper'
-    inputs:
-      gradleWrapperFile: 'gradlew'
-      tasks: 'clean build'
-      options: '-Xmx3072m --no-daemon'
-      publishJUnitResults: true
+- script: ./gradlew build
+  displayName: 'Build with Gradle'
 
-
+- script: ./gradlew run
+  displayName: 'Run JAR'
+  
+- script: java -jar gradle-wrapper.jar
+  displayName: 'This is the output of this project'
