@@ -10,15 +10,21 @@ pool:
   name: Default   
 
 steps:
-  - task: Gradle@3
-    displayName: 'Build with Gradle Wrapper'
-    inputs:
-      gradleWrapperFile: 'gradlew'            # points at your wrapper script
-      tasks: 'clean build'                    # or whatever tasks you need
-      options: '-Xmx3072m --no-daemon'        # heap and no‑daemon flags
-      publishJUnitResults: true
-      testResultsFiles: '**/build/test-results/**/*.xml'
-      javaHomeOption: 'JDKVersion'            # pick a JDK by version
-      jdkVersionOption: '17.0'                  # matches JAVA_HOME_17_X64
-      jdkArchitectureOption: 'x64'
+- task: JavaToolInstaller@0
+  displayName: 'Install JDK 17'
+  inputs:
+    versionSpec: '17'
+    jdkArchitectureOption: 'x64'
+    jdkSourceOption: 'PreInstalled'
 
+- task: Gradle@3
+  displayName: 'Build with Gradle Wrapper'
+  inputs:
+    gradleWrapperFile: 'gradlew'
+    tasks: 'clean build'
+    options: '-Xmx3072m --no-daemon'
+    publishJUnitResults: true
+    testResultsFiles: '**/build/test-results/**/*.xml'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.17'
+    jdkArchitectureOption: 'x64'
