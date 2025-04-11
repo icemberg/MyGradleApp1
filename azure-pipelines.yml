@@ -4,19 +4,21 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
 trigger:
-- main
+  - main
 
 pool:
-  name: Default
+  name: Default   
 
 steps:
-- task: Gradle@3
-  inputs:
-    gradleWrapperFile: 'gradlew'  # Path to your Gradle wrapper
-    tasks: 'build'  # Replace with the tasks you want to run
-    options: '-Xmx3072m' 
-    publishJUnitResults: true
-    testResultsFiles: '**/TEST-*.xml'  # Updated pattern for test result files
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '17.0.14'  # Replace with your JDK version
-    jdkArchitectureOption: 'x64'
+  - task: Gradle@3
+    displayName: 'Build with Gradle Wrapper'
+    inputs:
+      gradleWrapperFile: 'gradlew'            # points at your wrapper script
+      tasks: 'clean build'                    # or whatever tasks you need
+      options: '-Xmx3072m --no-daemon'        # heap and no‑daemon flags
+      publishJUnitResults: true
+      testResultsFiles: '**/build/test-results/**/*.xml'
+      javaHomeOption: 'JDKVersion'            # pick a JDK by version
+      jdkVersionOption: '17.0'                  # matches JAVA_HOME_17_X64
+      jdkArchitectureOption: 'x64'
+
