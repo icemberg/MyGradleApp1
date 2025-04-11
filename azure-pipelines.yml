@@ -23,5 +23,5 @@ steps:
       tasks: 'clean build'
       options: '-Xmx3072m --no-daemon'
       publishJUnitResults: true
-      testResultsFiles: '**/build/test-results/**/*.xml'
+
 
