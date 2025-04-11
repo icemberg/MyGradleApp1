@@ -24,6 +24,4 @@ steps:
       options: '-Xmx3072m --no-daemon'
       publishJUnitResults: true
       testResultsFiles: '**/build/test-results/**/*.xml'
-      javaHomeOption: 'JDKVersion'
-      jdkVersionOption: '17'
-      jdkArchitectureOption: 'x64'
+
