@@ -18,6 +18,3 @@ steps:
 
 - script: ./gradlew run
   displayName: 'Run JAR'
-  
-- script: java -jar gradle-wrapper.jar
-  displayName: 'This is the output of this project'
